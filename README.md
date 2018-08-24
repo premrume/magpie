@@ -4,7 +4,7 @@
 ## What is magpie
 > A magpie is a loud-voiced black and white bird. If someone calls you a magpie, you should probably quiet down. ... You might describe your chatterbox neighbor as a magpie — and the word itself comes from the nickname Mag, short for Margaret and commonly used in slang English to mean "idle chattering."
 
-###Chatter Highlights:
+### Chatter Highlights:
 * flask / python
 * bootstrap
 * docker
@@ -33,59 +33,59 @@
 ----
 ## JUST-RUN-IT
 
-###1. Sanity check that you got the tools (sample below)
+### 1. Sanity check that you got the tools (sample below)
 
-	[me@localhost magpie]$ docker images
+    [me@localhost magpie]$ docker images
 	REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-	[me@localhost magpie]$ docker ps
+    [me@localhost magpie]$ docker ps
 	CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-	[me@localhost magpie]$ docker volume ls
+    [me@localhost magpie]$ docker volume ls
 	DRIVER              VOLUME NAME
 
-###2. Build (one time deal)
+### 2. Build (one time deal)
 
-	[me@localhost magpie]$  cd ./magpie
+    [me@localhost magpie]$  cd ./magpie
     [me@localhost magpie]$ docker-compose build
-    me@localhost magpie]$ docker images
+    [me@localhost magpie]$ docker images
 	REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 	magpie_web          latest              7d4606b04c4a        58 seconds ago      721MB
 	magpie_postgres     latest              7347e741192a        2 minutes ago       229MB
 	postgres            9.6                 0178d5af9576        41 hours ago        229MB
 	python              3.6.1               955d0c3b1bb2        13 months ago       684MB
 
-###3. Run 
-	[me@localhost magpie]$ docker-compose up -d
+### 3. Run 
+    [me@localhost magpie]$ docker-compose up -d
 	Creating network "magpie_magpie" with the default driver
 	Creating volume "magpie_data_postgres" with default driver
 	Creating volume "magpie_data_images" with default driver
 	Creating magpie_postgres_1 ... done
 	Creating magpie_web_1      ... done
 
-###4. Sanity Check
-	[me@localhost magpie]$ docker volume ls
+### 4. Sanity Check
+    [me@localhost magpie]$ docker volume ls
 	DRIVER              VOLUME NAME
 	local               magpie_data_images
 	local               magpie_data_postgres
-	[me@localhost magpie]$ docker ps
+    [me@localhost magpie]$ docker ps
 	CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
 	12d777163781        magpie_web          "/bin/sh -c 'flask..."   42 seconds ago      Up 41 seconds       0.0.0.0:5000->5000/tcp   magpie_web_1
 	768b77ad63a4        magpie_postgres     "docker-entrypoint..."   42 seconds ago      Up 42 seconds       0.0.0.0:5432->5432/tcp   magpie_postgres_1
     
-###5. GOTTA INIT THE DB ONE TIME ...
-	[me@localhost magpie]$ docker-compose run --rm web python ./db_create.py
+### 5. GOTTA INIT THE DB ONE TIME ...
+    [me@localhost magpie]$ docker-compose run --rm web python ./db_create.py
 	Starting magpie_postgres_1 ... done
 	/usr/local/lib/python3.6/site-packages/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from release 2.8; in order to keep installing from binary please use "pip install psycopg2-binary" instead. For details see: <http://initd.org/psycopg/docs/install.html#binary-install-from-pypi>.
   """)
 
-###6. GOTO Web browser and open and cross your fingers:
+### 6. GOTO Web browser and open and cross your fingers:
     http://0.0.0.0:5000
     # test an upload...remember to load a jpg (image)
     
-###7. Shut things down - DO NOT FORGET TO DO THIS
+### 7. Shut things down - DO NOT FORGET TO DO THIS
     [me@localhost magpie]$ docker-compose down
     
-###8. Peek at data
-	[me@localhost magpie]$ docker volume ls
+### 8. Peek at data
+     [me@localhost magpie]$ docker volume ls
 	DRIVER              VOLUME NAME
 	local               magpie_data_images
 	local               magpie_data_postgres
@@ -110,16 +110,16 @@
     # if you want to DELETE the data 
     # docker volume prune
         
-###9. Restart
+### 9. Restart
     [me@localhost magpie]$docker-compose up -d
     ... goto browser if you did not prune, data persists
     
 ----
 ## JUST-DEV-IT
-###1. Sanity check
+### 1. Sanity check
     cd <yada>/magpie
     python3 --V  #you got it in path?
-###2. Setup
+### 2. Setup
     cd ./web
     python3 -m virutalenv venv
     # sorry, you will have to go do sudo things for pip install pyscopg ...
@@ -127,13 +127,13 @@
     #     prolly something like:  pip install pyscopg2
     # but, here is the gist of pip needs:
     pip install --no-cache-dir -r requirements.txt
-###3. Source environment (always)
+### 3. Source environment (always)
     . ./web/venv/bin/activate
-###4. Update the users/password (one time deal, opt'l)
+### 4. Update the users/password (one time deal, opt'l)
     vi ./instance/flask.cfg
     python3 db_create_dockerfile.py
     cd -
-###5. Build & Run (one time deal)
+### 5. Build & Run (one time deal)
     docker-compose build
     # verify  that you have Magpie's docker images
     docker images
@@ -142,17 +142,17 @@
     # web is the service name in docker-compose.yml
     # do the needful for the db setup
     docker-compose run --rm web python ./db_create.py
-###6. GOTO Web browser and open and cross your fingers:
+### 6. GOTO Web browser and open and cross your fingers:
     http://0.0.0.0:5000
     # test an upload...
-###7. Shut things down - DO NOT FORGET TO DO THIS
+### 7. Shut things down - DO NOT FORGET TO DO THIS
     docker-compose down
-###8. Peek at data
+### 8. Peek at data
     docker volume ls
     docker volume inspect magpie_...
     # if you want to kill it then prune, don't prune to persist
     docker volume prune
-###9. Restart
+### 9. Restart
     docker-compose up -d
-###10.  See your changes live because of the ./web ...
+### 10.  See your changes live because of the ./web ...
 I gotta verify that the above steps are correct... over and out for now... 
