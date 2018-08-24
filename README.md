@@ -74,8 +74,7 @@
 ### 5. GOTTA INIT THE DB ONE TIME ...
     [me@localhost magpie]$ docker-compose run --rm web python ./db_create.py
 	Starting magpie_postgres_1 ... done
-	/usr/local/lib/python3.6/site-packages/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from release 2.8; in order to keep installing from binary please use "pip install psycopg2-binary" instead. For details see: <http://initd.org/psycopg/docs/install.html#binary-install-from-pypi>.
-  """)
+	/usr/local/lib/python3.6/site-packages/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from r blah blah blah
 
 ### 6. GOTO Web browser and open and cross your fingers:
     http://0.0.0.0:5000
