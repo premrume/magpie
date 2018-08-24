@@ -1,0 +1,35 @@
+version: '2' 
+
+services:
+  postgres:
+    build: ./postgresql
+    ports:
+      - "5432:5432"
+    volumes:
+      - data_postgres:/var/lib/postgresql/data
+    networks:
+      - magpie
+  web:
+    depends_on:
+      - postgres
+    build: ./web
+    restart: always
+    environment:
+      - FLASK_APP=run.py
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    ports:
+      - "5000:5000"
+    volumes:
+      - data_images:/var/scratch/uploads
+      - ./web:/var/scratch/web
+    networks:
+      - magpie
+
+# I am struggling with the use of volumes
+volumes:
+  data_postgres:
+  data_images:
+
+networks:
+  magpie:
