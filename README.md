@@ -32,7 +32,9 @@
     docker-compose down
 ----
 ## JUST-RUN-IT
+
 ###1. Sanity check that you got the tools (sample below)
+
 	[me@localhost magpie]$ docker images
 	REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 	[me@localhost magpie]$ docker ps
@@ -41,6 +43,7 @@
 	DRIVER              VOLUME NAME
 
 ###2. Build (one time deal)
+
 	[me@localhost magpie]$  cd ./magpie
     [me@localhost magpie]$ docker-compose build
     me@localhost magpie]$ docker images
