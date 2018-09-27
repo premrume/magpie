@@ -4,7 +4,7 @@
 
 from flask import Flask, render_template, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-from flask_uploads import UploadSet, IMAGES, configure_uploads
+from flask_uploads import UploadSet, TEXT, configure_uploads
 
 ################
 #### config ####
@@ -15,9 +15,9 @@ app.config.from_pyfile('flask.cfg')
 
 db = SQLAlchemy(app)
 
-# Configure the image uploading via Flask-Uploads
-images = UploadSet('images', IMAGES)
-configure_uploads(app, images)
+# Configure the files uploading via Flask-Uploads
+files = UploadSet('files', TEXT)
+configure_uploads(app, files)
 
 ####################
 #### blueprints ####
@@ -31,7 +31,7 @@ app.register_blueprint(home_blueprint)
 app.register_blueprint(papers_blueprint)
 
 # TODO:  Move this to ingx
-@app.route('/images/<filename>')
+@app.route('/files/<filename>')
 def uploaded_file(filename):
     return send_from_directory(
         app.config['UPLOADS_IMAGES_DEST'],

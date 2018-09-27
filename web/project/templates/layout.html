@@ -14,20 +14,20 @@
     -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>Scratch Application</title>
+    <title>MagPie Application</title>
   </head>
 
   <body>
     <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">ScratchPad</a>
+      <a class="navbar-brand" href="#">MagPie</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link active" href="{{ url_for('home.go_home') }}">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="{{ url_for('papers.go_images_list') }}">List</a>
-          <a class="nav-item nav-link" href="{{ url_for('papers.go_images_upload') }}">Upload</a>
+          <a class="nav-item nav-link" href="{{ url_for('papers.go_files_list') }}">List</a>
+          <a class="nav-item nav-link" href="{{ url_for('papers.go_files_upload') }}">Upload</a>
         </div>
       </div>
     </nav>

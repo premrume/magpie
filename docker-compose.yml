@@ -21,15 +21,19 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - data_images:/var/scratch/uploads
+      - data_files:/var/scratch/uploads
       - ./web:/var/scratch/web
     networks:
       - magpie
 
-# I am struggling with the use of volumes
 volumes:
   data_postgres:
-  data_images:
+  data_files:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /tmp/ingest
 
 networks:
   magpie:
