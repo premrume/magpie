@@ -4,11 +4,12 @@
 #### imports ####
 #################
 
+import uuid
 from flask import render_template, Blueprint, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from sqlalchemy.exc import IntegrityError
 from project.models import Paper
-from project import db, files
+from project import db, magpie
 from .forms import AddPaperForm
 
 ################
@@ -33,23 +34,22 @@ def flash_errors(form):
 #### routes ####
 ################
 @papers_blueprint.route('/papers/upload/', methods=['GET','POST'])
-def go_files_upload():
+def go_papers_upload():
     form = AddPaperForm()
     if request.method == 'POST':
         try:
          if form.validate_on_submit():
              # TODO: make this a secure filename
-             print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-             print(request.files)
-             filename = files.save(request.files['upload'])
-             print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-             print(filename)
-             url = files.url(filename)
-             new_paper = Paper(form.title.data, filename, url)
+             id = str(uuid.uuid4())
+             orig_filename = request.files['upload'].filename
+             uuid_filename = id + "." + orig_filename
+             saved = magpie.save(request.files['upload'], name=uuid_filename)
+             url = magpie.url(uuid_filename)
+             new_paper = Paper(id, form.title.data, orig_filename, url, uuid_filename )
              db.session.add(new_paper)
              db.session.commit()
              flash('SUCCESS: Title {} added'.format(new_paper.title), 'success')
-             return redirect(url_for('papers.go_files_upload'))
+             return redirect(url_for('papers.go_papers_upload'))
 
          else:
              flash('ERROR: try again', 'error')
@@ -57,10 +57,10 @@ def go_files_upload():
         except IntegrityError:
              flash('ERROR: Title {} is a duplicate, try again'.format(new_paper.title), 'error')
 
-    return render_template('files_upload.html',
+    return render_template('papers_upload.html',
                            form=form)
 
 @papers_blueprint.route('/papers/list', methods=['GET'])
-def go_files_list():
+def go_papers_list():
     all_papers = Paper.query.all()
-    return render_template('files_list.html', papers=all_papers)
+    return render_template('papers_list.html', papers=all_papers)

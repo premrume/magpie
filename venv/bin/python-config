@@ -1,4 +1,4 @@
-#!/home/me/magpie/venv/bin/python
+#!/home/me/shitto/venv/bin/python
 
 import sys
 import getopt

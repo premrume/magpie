@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Scratch Info -->
+    <!-- Info -->
     <meta name="description" content="Basic Application using Flask / Python / Boottrap">
     <meta name="author" content="Margaret Premru">
 
@@ -14,20 +14,20 @@
     -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>MagPie Application</title>
+    <title>SpeakEasy Application</title>
   </head>
 
   <body>
     <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">MagPie</a>
+      <a class="navbar-brand" href="#">SpeakEasy</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link active" href="{{ url_for('home.go_home') }}">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="{{ url_for('papers.go_files_list') }}">List</a>
-          <a class="nav-item nav-link" href="{{ url_for('papers.go_files_upload') }}">Upload</a>
+          <a class="nav-item nav-link" href="{{ url_for('papers.go_papers_list') }}">List</a>
+          <a class="nav-item nav-link" href="{{ url_for('papers.go_papers_upload') }}">Upload</a>
         </div>
       </div>
     </nav>

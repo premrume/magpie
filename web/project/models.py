@@ -3,19 +3,22 @@ from datetime import datetime
 
 class Paper(db.Model):
 
-    __tablename__ = "files"
+    __tablename__ = "papers"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(36), unique=True, primary_key=True)
     title = db.Column(db.String, unique=True, nullable=False)
-    jpg_filename = db.Column(db.String, default=None, nullable=True)
-    jpg_url = db.Column(db.String, default=None, nullable=True)
-    jpg_timestamp = db.Column(db.DateTime, nullable=True)
+    orig_filename = db.Column(db.String, default=None, nullable=True)
+    uuid_filename = db.Column(db.String, default=None, nullable=True)
+    posted_url = db.Column(db.String, default=None, nullable=True)
+    posted_timestamp = db.Column(db.DateTime, nullable=True)
 
-    def __init__(self, title, f1, u1 ):
+    def __init__(self, id, title, f1, u1, f2 ):
+        self.id = id
         self.title = title
-        self.jpg_filename = f1
-        self.jpg_url = u1
-        self.jpg_timestamp = datetime.now()
+        self.orig_filename = f1
+        self.uuid_filename = f2
+        self.posted_url = u1
+        self.posted_timestamp = datetime.now()
 
     def __repr__(self):
         return '<title {}'.format(self.title)

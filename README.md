@@ -57,14 +57,14 @@
     [me@localhost magpie]$ docker-compose up -d
 	Creating network "magpie_magpie" with the default driver
 	Creating volume "magpie_data_postgres" with default driver
-	Creating volume "magpie_data_files" with default driver
+	Creating volume "magpie_data_images" with default driver
 	Creating magpie_postgres_1 ... done
 	Creating magpie_web_1      ... done
 
 ### 4. Sanity Check
     [me@localhost magpie]$ docker volume ls
 	DRIVER              VOLUME NAME
-	local               magpie_data_files
+	local               magpie_data_images
 	local               magpie_data_postgres
     [me@localhost magpie]$ docker ps
 	CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
@@ -78,7 +78,7 @@
 
 ### 6. GOTO Web browser and open and cross your fingers:
     http://0.0.0.0:5000
-    # test an upload...remember to load a txt
+    # test an upload...remember to load a jpg (image)
     
 ### 7. Shut things down - DO NOT FORGET TO DO THIS
     [me@localhost magpie]$ docker-compose down
@@ -86,24 +86,24 @@
 ### 8. Peek at data
      [me@localhost magpie]$ docker volume ls
 	DRIVER              VOLUME NAME
-	local               magpie_data_files
+	local               magpie_data_images
 	local               magpie_data_postgres
-	[me@localhost magpie]$ docker inspect magpie_data_files
+	[me@localhost magpie]$ docker inspect magpie_data_images
 	[
     	{
         "CreatedAt": "2018-08-24T13:54:02-04:00",
         "Driver": "local",
         "Labels": null,
-        "Mountpoint": "/var/lib/docker/volumes/magpie_data_files/_data",
-        "Name": "magpie_data_files",
+        "Mountpoint": "/var/lib/docker/volumes/magpie_data_images/_data",
+        "Name": "magpie_data_images",
         "Options": {},
         "Scope": "local"
     }
 	]
-	[me@localhost magpie]$ sudo ls /var/lib/docker/volumes/magpie_data_files/_data
+	[me@localhost magpie]$ sudo ls /var/lib/docker/volumes/magpie_data_images/_data
 	[sudo] password for me: 
-	files
-	[me@localhost magpie]$ sudo ls /var/lib/docker/volumes/magpie_data_files/_data/images
+	images
+	[me@localhost magpie]$ sudo ls /var/lib/docker/volumes/magpie_data_images/_data/images
 	yourfile.jpg
 	
     # if you want to DELETE the data 

@@ -4,16 +4,16 @@
 {% block content %}
 
 <div class="card">
-  <h5 class="card-header">Home of MagPie</h5>
+  <h5 class="card-header">Home of SpeakEasy</h5>
   <div class="card-body">
     <h5 class="card-title">List</h5>
-    <p class="card-text">List of uploaded files</p>
-    <a href="{{ url_for('papers.go_files_list') }}" class="btn btn-primary">List</a>
+    <p class="card-text">List of Uploaded Files</p>
+    <a href="{{ url_for('papers.go_papers_list') }}" class="btn btn-primary">List</a>
   </div>
   <div class="card-body">
     <h5 class="card-title">Upload</h5>
-    <p class="card-text">Upload more  files</p>
-    <a href="{{ url_for('papers.go_files_upload') }}" class="btn btn-secondary">Upload</a>
+    <p class="card-text">Upload more files</p>
+    <a href="{{ url_for('papers.go_papers_upload') }}" class="btn btn-secondary">Upload</a>
   </div>
 </div>
 
