@@ -22,7 +22,7 @@ services:
       - "5000:5000"
     volumes:
       - data_images:/var/scratch/uploads
-      - ./web:/var/scratch/web
+      - /home/me/magpie/web:/var/scratch/web
     networks:
       - magpie
 
